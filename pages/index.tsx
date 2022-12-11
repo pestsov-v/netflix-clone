@@ -3,8 +3,19 @@ import Head from 'next/head'
 import {Banner, Header, Row} from "../components";
 import requests from "../utils/requests";
 import {HomePageProps} from "../types/pages";
+import {RowProps} from "../components/Row/Row.props";
 
 const Home = (homeProps: HomePageProps) => {
+    const rows: Array<RowProps> = [
+        { title: "Trending Now", movies: homeProps.trendingNow },
+        { title: "Top Rated", movies: homeProps.topRated },
+        { title: "Action Thrillers", movies: homeProps.actionMovies },
+        { title: "Comedies", movies: homeProps.comedyMovies },
+        { title: "Scary Movies", movies: homeProps.horrorMovies },
+        { title: "Romance Movies", movies: homeProps.romanceMovies },
+        { title: "Documentaries", movies: homeProps.documentaries },
+    ]
+
   return (
     <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh]">
       <Head>
@@ -15,15 +26,14 @@ const Home = (homeProps: HomePageProps) => {
         <Header />
         <main className="relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
             <Banner netflixOriginals={homeProps.netflixOriginals}/>
-            <section>
-                <Row title="Trending Now" movies={homeProps.trendingNow} />
-                <Row title="Top Rated" movies={homeProps.topRated} />
-                <Row title="Action Thrillers" movies={homeProps.actionMovies} />
-
-                <Row title="Comedies" movies={homeProps.comedyMovies} />
-                <Row title="Scary Movies" movies={homeProps.horrorMovies} />
-                <Row title="Romance Movies" movies={homeProps.romanceMovies} />
-                <Row title="Documentaries" movies={homeProps.documentaries} />
+            <section className="md:space-y-24">
+                {rows.map(row => (
+                    <Row
+                        title={row.title}
+                         movies={row.movies}
+                         key={row.title}
+                    />
+                ))}
             </section>
         </main>
     </div>
