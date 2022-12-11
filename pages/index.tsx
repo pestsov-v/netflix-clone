@@ -1,6 +1,6 @@
 import type {GetServerSideProps} from 'next'
 import Head from 'next/head'
-import {Banner, Header} from "../components";
+import {Banner, Header, Row} from "../components";
 import requests from "../utils/requests";
 import {HomePageProps} from "../types/pages";
 
@@ -15,6 +15,16 @@ const Home = (homeProps: HomePageProps) => {
         <Header />
         <main className="relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
             <Banner netflixOriginals={homeProps.netflixOriginals}/>
+            <section>
+                <Row title="Trending Now" movies={homeProps.trendingNow} />
+                <Row title="Top Rated" movies={homeProps.topRated} />
+                <Row title="Action Thrillers" movies={homeProps.actionMovies} />
+
+                <Row title="Comedies" movies={homeProps.comedyMovies} />
+                <Row title="Scary Movies" movies={homeProps.horrorMovies} />
+                <Row title="Romance Movies" movies={homeProps.romanceMovies} />
+                <Row title="Documentaries" movies={homeProps.documentaries} />
+            </section>
         </main>
     </div>
   )
